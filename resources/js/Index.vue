@@ -8,7 +8,7 @@
       <router-link class="btn nav-button" :to="{name: 'contact'}">Contact</router-link>
 
       <router-link class="btn nav-button" v-bind:to="{name: 'home'}">Home</router-link>
-      <router-link class="btn nav-button" v-bind:to="{name: 'contact'}">Contact</router-link>
+      <router-link class="btn nav-button" v-bind:to="{name: 'example'}">Example</router-link>
     </nav>
 
     <div class="container mt-4 mb-4 pr-4 pl-4">
