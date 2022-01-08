@@ -1,9 +1,11 @@
 <template>
 
-<div>
-  <h1>{{ itemTitle }}</h1>
-  <p>{{ itemContent }}</p>
-  <p>{{ price }}</p>
+<div class="card mb-1">
+  <div class="card-body">
+    <h5 class="card-title">{{ itemTitle }}</h5>
+    <p class="card-text">{{ itemContent }}</p>
+    <p class="catd-text">{{ price }}</p>
+  </div>
 </div>
 
 </template>
@@ -15,6 +17,10 @@ export default {
     "itemContent": String,
     "price": Number
   },
+
+  mounted() {
+    console.log({mounted: "child component" , itemTitle: this.itemTitle});
+  }
 
 }
 </script>
