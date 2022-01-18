@@ -10,10 +10,7 @@
           class="col d-flex align-items-stretch"
           v-for="(bookable, index) in colsInRow(row)"
           :key="'col' + index">
-          <bookable-list-item
-            :item-title="bookable.title"
-            :item-content="bookable.description"
-            :price="1000">
+          <bookable-list-item v-bind="bookable">
           </bookable-list-item>
         </div>
         <div
