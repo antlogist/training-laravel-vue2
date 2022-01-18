@@ -2,9 +2,9 @@
 
 <div class="card mb-1 w-100">
   <div class="card-body">
-    <h5 class="card-title">{{ itemTitle }}</h5>
-    <p class="card-text">{{ itemContent }}</p>
-    <p class="catd-text">{{ price }}</p>
+    <router-link :to="{ name: 'bookable', params: {id} }"><h5>{{ title }}</h5></router-link>
+    <p class="card-text">{{ description }}</p>
+    <p class="catd-text">{{ id }}</p>
   </div>
 </div>
 
@@ -13,13 +13,14 @@
 <script>
 export default {
   props: {
-    "itemTitle": String,
-    "itemContent": String,
-    "price": Number
+    "title": String,
+    "description": String,
+    "id": Number
   },
 
   mounted() {
-    console.log({mounted: "child component" , itemTitle: this.itemTitle});
+    console.log({mounted: "child component" ,
+    itemTitle: this.itemTitle});
   }
 
 }
