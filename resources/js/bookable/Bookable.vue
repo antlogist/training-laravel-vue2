@@ -15,12 +15,13 @@
     </div>
   </div>
   <div class="col-md-4">
-    availability and prices
+    <Availability></Availability>
   </div>
 </div>
 </template>
 
 <script>
+import Availability from "./Availability.vue"
 export default {
   data() {
     return {
@@ -34,6 +35,9 @@ export default {
       this.bookable = response.data.data;
       this.loading = false;
       });
+  },
+  components: {
+    Availability
   }
 }
 </script>
