@@ -7,12 +7,12 @@
 
       <div class="form-group col-6 pb-4">
         <label for="from">From</label>
-        <input type="text" name="from" class="form-control form-control-sm" placeholder="Start date">
+        <input type="text" name="from" class="form-control form-control-sm" placeholder="Start date" v-model="from">
       </div>
 
       <div class="form-group col-6 pb-4">
         <label for="to">To</label>
-        <input type="text" name="to" class="form-control form-control-sm" placeholder="End date">
+        <input type="text" name="to" class="form-control form-control-sm" placeholder="End date" v-model="to">
       </div>
 
     </div>
@@ -22,6 +22,17 @@
 
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      from: null,
+      to: null
+    }
+  }
+}
+</script>
 
 <style scoped>
 label {
