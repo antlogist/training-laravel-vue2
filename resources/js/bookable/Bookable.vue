@@ -13,6 +13,9 @@
         </div>
       </div>
     </div>
+
+    <ReviewList></ReviewList>
+
   </div>
   <div class="col-md-4">
     <Availability></Availability>
@@ -21,7 +24,8 @@
 </template>
 
 <script>
-import Availability from "./Availability.vue"
+import Availability from "./Availability.vue";
+import ReviewList from "./ReviewList.vue";
 export default {
   data() {
     return {
@@ -37,7 +41,8 @@ export default {
       });
   },
   components: {
-    Availability
+    Availability,
+    ReviewList
   }
 }
 </script>
