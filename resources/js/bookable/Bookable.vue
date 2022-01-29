@@ -14,11 +14,11 @@
       </div>
     </div>
 
-    <ReviewList></ReviewList>
+    <ReviewList :bookableId="this.$route.params.id"></ReviewList>
 
   </div>
   <div class="col-md-4">
-    <Availability></Availability>
+    <Availability :bookableId="this.$route.params.id"></Availability>
   </div>
 </div>
 </template>
