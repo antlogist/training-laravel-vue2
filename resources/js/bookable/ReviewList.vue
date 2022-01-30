@@ -7,10 +7,13 @@
       <div class="border-bottom d-none d-md-block" v-for="(review, index) in reviews" :key="'review' + index">
         <div class="row pt-4">
           <div class="col-md-6">Anthony Underwood</div>
-          <div class="col-md-6 d-flex justify-content-end">{{ review.rating }}</div>
+          <div class="col-md-6 d-flex justify-content-end">
+            {{ review.rating }}
+            <StarRating></StarRating>
+          </div>
         </div>
         <div class="row">
-          <div class="col-md-12">{{ review.created_at }}</div>
+          <div class="col-md-12">{{ review.created_at | fromNow }}</div>
         </div>
         <div class="row pt-4 pb-4">
           <div class="col-md-12">
@@ -23,6 +26,7 @@
 </template>
 
 <script>
+// import moment from 'moment';
 export default {
   props: {
     bookableId: String
@@ -39,6 +43,12 @@ export default {
     axios.get(`/api/bookables/${this.bookableId}/reviews`)
          .then(response => this.reviews = response.data.data)
          .then(()=>this.loading = false);
-  }
+  },
+  // this filter has added globally
+  // filters: {
+  //   fromNow(value) {
+  //     return  moment(value).fromNow();
+  //   }
+  // }
 }
 </script>
