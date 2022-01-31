@@ -9,7 +9,6 @@
         <div class="row pt-4">
           <div class="col-md-6">Anthony Underwood</div>
           <div class="col-md-6 d-flex justify-content-end">
-            {{ review.rating }}
             <StarRating :rating="review.rating"></StarRating>
           </div>
         </div>
