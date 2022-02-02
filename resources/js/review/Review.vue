@@ -3,7 +3,10 @@
 
     <div class="form-group">
       <label class="text-muted">Select thhe star rating (1 is worst - 5 is best)</label>
-      <StarRating :rating="review.rating" class="fa-3x" @rating:changed="review.rating = $event"></StarRating>
+      <StarRating
+        v-model="review.rating"
+        class="fa-3x">
+      </StarRating>
     </div>
 
     <div class="form-group mt-3">
