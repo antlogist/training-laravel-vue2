@@ -69,7 +69,11 @@
             </div>
 
             <div class="d-grid mt-1">
-              <button class="btn btn-primary btn-lg btn-block">Submit</button>
+              <button
+                class="btn btn-primary btn-lg btn-block"
+                @click.prevent="submit" :disabled="loading">
+                  Submit
+              </button>
             </div>
 
           </div>
@@ -90,7 +94,8 @@ export default {
   data() {
     return {
       review: {
-        rating: 4,
+        id: null,
+        rating: 5,
         content: null
       },
       existingReview: null,
@@ -100,15 +105,16 @@ export default {
     }
   },
   created() {
+    this.review.id = this.$route.params.id;
     this.loading = true;
-    axios.get(`/api/reviews/${this.$route.params.id}`)
+    axios.get(`/api/reviews/${this.review.id}`)
          .then((response) => {
            this.existingReview = response.data.data;
           })
          .catch(err => {
            if(is404(err)) {
           return axios
-            .get(`/api/booking-by-review/${this.$route.params.id}`)
+            .get(`/api/booking-by-review/${this.review.id}`)
             .then((response) => {
               this.booking = response.data.data;
             }).catch((err) => {
@@ -138,10 +144,20 @@ export default {
       return this.booking !== null;
     },
     oneColumn() {
-      return !this.loading && this.alreadyReviewed
+      return !this.loading && this.alreadyReviewed;
     },
     twoColumns() {
-      return this.loading || !this.alreadyReviewed
+      return this.loading || !this.alreadyReviewed;
+    }
+  },
+  methods: {
+    submit() {
+      this.loading = true;
+      axios
+        .post(`/api/reviews`, this.review)
+        .then((response) => { console.log(response) })
+        .catch((err)=> { this.error = true })
+        .then(()=>{ this.loading = false });
     }
   }
 }
