@@ -1,9 +1,7 @@
 <template>
   <div>
 
-    <div v-if="error">
-      Unknown error has occured, please try again later!
-    </div>
+    <FatalError v-if="error"></FatalError>
     <div v-else class="row">
       <div
         :class="[
