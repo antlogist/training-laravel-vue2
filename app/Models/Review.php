@@ -9,6 +9,8 @@ class Review extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['id', 'rating', 'content'];
+
     public function bookable() {
         return $this->belongsTo(Bookable::class);
     }
