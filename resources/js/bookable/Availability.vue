@@ -17,10 +17,7 @@
         placeholder="Start date"
         v-model="from"
         :class="[{'is-invalid': errorFor('from')}]">
-        <div class="invalid-feedback"
-          v-for="(error, index) in errorFor('from')"
-          :key="'form' + index">{{ error }}
-        </div>
+        <ValidationErrors :errors="errorFor('from')"></ValidationErrors>
       </div>
 
       <div class="form-group col-6 pb-4">
@@ -33,10 +30,7 @@
         placeholder="End date"
         v-model="to"
         :class="[{'is-invalid': errorFor('to')}]">
-        <div class="invalid-feedback"
-          v-for="(error, index) in errorFor('to')"
-          :key="'to' + index">{{ error }}
-        </div>
+        <ValidationErrors :errors="errorFor('to')"></ValidationErrors>
       </div>
 
     </div>
@@ -50,9 +44,10 @@
 </template>
 
 <script>
+import {is422} from './../shared/utils/response';
 export default {
   props: {
-    bookableId: String
+    bookableId: Number
   },
   data() {
     return {
@@ -72,7 +67,7 @@ export default {
       .then(response => {
         this.status = response.status;
       }).catch(error => {
-        if(422 == error.response.status) {
+        if(is422(error)) {
           this.errors = error.response.data.errors;
           console.log(error);
           this.loading = false;
