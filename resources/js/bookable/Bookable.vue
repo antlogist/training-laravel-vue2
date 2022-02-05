@@ -18,7 +18,7 @@
 
   </div>
   <div class="col-md-4">
-    <Availability :bookableId="this.$route.params.id"></Availability>
+    <Availability :bookableId="Number(this.$route.params.id)"></Availability>
   </div>
 </div>
 </template>
