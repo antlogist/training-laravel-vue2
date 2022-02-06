@@ -18,18 +18,7 @@ const routes = [
     path: "/review/:id",
     component: Review,
     name: "review"
-  },
-  {
-    path: "/example",
-    component: Bookables,
-    name: "example"
-  },
-  {
-    path: "/contact",
-    component: Bookables,
-    name: "contact"
   }
-
 ];
 
 const router = new VueRouter({
