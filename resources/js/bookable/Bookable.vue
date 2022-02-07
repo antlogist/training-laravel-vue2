@@ -18,9 +18,17 @@
 
   </div>
   <div class="col-md-4">
-    <Availability :bookableId="Number(this.$route.params.id)"
+    <Availability class="mb-4" :bookableId="Number(this.$route.params.id)"
       @availability="checkPrice($event)">
     </Availability>
+
+    <transition name="fade">
+      <div class="d-grid" v-if="price">
+          <PriceBreakdown :price="price" class="mb-4"></PriceBreakdown>
+          <button class="btn btn-outline-secondary">Book now</button>
+      </div>
+    </transition>
+
   </div>
 </div>
 </template>
@@ -28,11 +36,14 @@
 <script>
 import Availability from "./Availability.vue";
 import ReviewList from "./ReviewList.vue";
+import PriceBreakdown from "./PriceBreakdown.vue";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       bookable: null,
-      loading: false
+      loading: false,
+      price: null
     }
   },
   created() {
@@ -42,14 +53,30 @@ export default {
       this.loading = false;
       });
   },
+  computed: mapState({
+    lastSearch: "lastSearch",
+  }),
   methods: {
-    checkPrice(hasAvailability) {
-      console.log(hasAvailability);
+    async checkPrice(hasAvailability) {
+      if(!hasAvailability) {
+        this.price = null;
+        return;
+      }
+
+      try {
+        this.price = (await axios.get(
+          `/api/bookables/${this.bookable.id}/price?from=${this.lastSearch.from}&to=${this.lastSearch.to}`
+          )).data.data;
+      } catch(err) {
+        this.price = null;
+      }
+
     }
   },
   components: {
     Availability,
-    ReviewList
+    ReviewList,
+    PriceBreakdown
   }
 }
 </script>
