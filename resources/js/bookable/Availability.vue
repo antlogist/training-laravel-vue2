@@ -2,8 +2,12 @@
   <div>
     <h6 class="text-uppercase text-secondary font-weight-bolder">
       Check availability
-      <span v-if="noAvailability" class="text-danger">(not available)</span>
-      <span v-if="hasAvailability" class="text-success">(available)</span>
+
+      <transition name="fade">
+        <span v-if="noAvailability" class="text-danger">(not available)</span>
+        <span v-if="hasAvailability" class="text-success">(available)</span>
+      </transition>
+
     </h6>
     <div class="row">
 
