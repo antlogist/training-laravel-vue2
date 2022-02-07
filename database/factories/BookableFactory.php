@@ -15,7 +15,8 @@ class BookableFactory extends Factory
     {
         return [
             'title' => $this->faker->city(),
-            'description' => $this->faker->text()
+            'description' => $this->faker->text(),
+            'price' => random_int(15, 600)
         ];
     }
 }
