@@ -18,7 +18,9 @@
 
   </div>
   <div class="col-md-4">
-    <Availability :bookableId="Number(this.$route.params.id)"></Availability>
+    <Availability :bookableId="Number(this.$route.params.id)"
+      @availability="checkPrice($event)">
+    </Availability>
   </div>
 </div>
 </template>
@@ -33,12 +35,17 @@ export default {
       loading: false
     }
   },
-  created(){
+  created() {
     this.loading = true;
     axios.get(`/api/bookables/${this.$route.params.id}`).then(response => {
       this.bookable = response.data.data;
       this.loading = false;
       });
+  },
+  methods: {
+    checkPrice(hasAvailability) {
+      console.log(hasAvailability);
+    }
   },
   components: {
     Availability,

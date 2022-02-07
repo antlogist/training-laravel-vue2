@@ -41,7 +41,13 @@
     <div class="d-grid">
       <button
         class="btn btn-secondary"
-        @click="check" :disabled="loading">Check</button>
+        @click="check" :disabled="loading">
+          <span v-if="!loading">Check!</span>
+          <span v-if="loading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+            Checking
+          </span>
+      </button>
     </div>
 
   </div>
@@ -65,7 +71,7 @@ export default {
     }
   },
   methods: {
-    check() {
+    async check() {
       this.loading = true;
       this.errors = null;
 
@@ -74,23 +80,21 @@ export default {
         to: this.to
       });
 
-      axios.get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`)
-      .then(response => {
-        this.status = response.status;
-      }).catch(error => {
+      try {
+        this.status = (await(axios
+        .get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`
+        ))).status;
+        this.$emit("availability", this.hasAvailability);
+      } catch(error) {
         if(is422(error)) {
           this.errors = error.response.data.errors;
-          console.log(error);
-          this.loading = false;
         }
         this.status = error.response.status;
-      }).then(() => {
-        this.loading = false;
-      });
+        this.$emit("availability", this.hasAvailability);
+      }
+      this.loading = false;
+
     },
-    // errorFor(field) {
-    //   return this.hasErrors && this.errors[field] ? this.errors[field] : null;
-    // }
   },
   computed: {
     hasErrors() {
