@@ -17,11 +17,5 @@ export default {
     "description": String,
     "id": Number
   },
-
-  mounted() {
-    console.log({mounted: "child component" ,
-    itemTitle: this.itemTitle});
-  }
-
 }
 </script>
