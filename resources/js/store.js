@@ -11,6 +11,15 @@ export default {
   },
   getters: {
     itemsInBasket: (state) => state.basket.items.length,
+    inBasketAlready: (state) => {
+      return function(id) {
+        // c b c c c
+        // false false true true ...
+        return state.basket.items.reduce((result, item) => {
+          return result || item.bookable.id == id
+        }, false);
+      }
+    }
   },
   mutations: {
     setLastSearch(state, payload) {

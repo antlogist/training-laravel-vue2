@@ -67,19 +67,18 @@ export default {
       this.loading = false;
       });
   },
-  computed: mapState({
-    lastSearch: "lastSearch",
-    inBasketAlready(state) {
+  computed: {
+  ...mapState({
+      lastSearch: "lastSearch",
+    }),
+    inBasketAlready() {
       if(null === this.bookable) {
         return false;
       }
-      // c b c c c
-      // false false true true ...
-      return state.basket.items.reduce((result, item) => {
-        return result || item.bookable.id == this.bookable.id
-      }, false);
+
+      return this.$store.getters.inBasketAlready(this.bookable.id);
     }
-  }),
+  },
   methods: {
     async checkPrice(hasAvailability) {
       if(!hasAvailability) {
