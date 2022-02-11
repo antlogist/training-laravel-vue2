@@ -50,11 +50,15 @@ class CheckoutController extends Controller
         $addressData = $data['customer'];
 
         $bookings = collect($bookingsData)->map(function($bookingsData) use ($addressData) {
+
+            $bookable = Bookable::findOrFail($bookingsData['bookable_id']);
+
             $booking = new Booking();
             $booking->from = $bookingsData['from'];
             $booking->to = $bookingsData['to'];
-            $booking->price = 200;
-            $booking->bookable_id = $bookingsData['bookable_id'];
+            $booking->price = $bookable->priceFor($booking->from, $booking->to)['total'];
+            // $booking->bookable_id = $bookingsData['bookable_id'];
+            $booking->bookable()->associate($bookable);
 
             $booking->address()->associate(Address::create($addressData));
 
