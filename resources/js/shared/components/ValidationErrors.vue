@@ -22,4 +22,7 @@ export default {
 .form-control.is-invalid ~ div > .invalid-feedback {
   display: block;
 }
+.form-select.is-invalid ~ div > .invalid-feedback {
+  display: block;
+}
 </style>
