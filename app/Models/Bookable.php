@@ -18,7 +18,7 @@ class Bookable extends Model
     }
 
     public function availableFor($from, $to):bool {
-        return $this->bookings()
+        return !$this->bookings()
                     ->betweenDates($from, $to)
                     ->count();
     }
