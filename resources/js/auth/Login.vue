@@ -31,11 +31,11 @@
 
           <div>
             No account yet?
-            <router-link :to="{name: 'home'}">Register</router-link>
+            <router-link :to="{name: 'register'}">Register</router-link>
           </div>
           <div>
             Forgotten password?
-            <router-link :to="{name: 'home'}">Register</router-link>
+            <router-link :to="{name: 'home'}">Reset Password</router-link>
           </div>
 
         </form>
@@ -46,6 +46,7 @@
 
 <script>
 import validationErrors from '../shared/mixins/validationErrors'
+import { logIn } from "../shared/utils/auth";
 export default {
   mixins: [validationErrors],
   data() {
@@ -66,13 +67,16 @@ export default {
             email: this.email,
             password: this.password
         });
-        await axios.get('/user');
+
+        logIn();
+        this.$store.dispatch('loadUser');
+        this.$router.push({ name: 'home' });
+
       } catch(error) {
         console.log(error);
         this.errors = error.response &&
         error.response.data.errors;
       }
-
 
       this.loading = false;
     }
