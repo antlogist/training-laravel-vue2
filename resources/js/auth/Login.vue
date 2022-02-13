@@ -31,11 +31,11 @@
 
           <div>
             No account yet?
-            <router-link :to="{name: 'home'}">Register</router-link>
+            <router-link :to="{name: 'register'}">Register</router-link>
           </div>
           <div>
             Forgotten password?
-            <router-link :to="{name: 'home'}">Register</router-link>
+            <router-link :to="{name: 'home'}">Reset Password</router-link>
           </div>
 
         </form>
