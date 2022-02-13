@@ -87,6 +87,11 @@ export default {
           commit('setLoggedIn', true);
         } catch(error) {
           dispatch('logout');
+
+          // If we don't check auhentication globally
+          // if(401 === error.resposnse.status) {
+          //   dispatch('logout');
+          // }
         }
       }
     },
